@@ -2,11 +2,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from django.views.generic import View, TemplateView, ListView, DetailView, CreateView
+from django.views.generic import View, TemplateView, ListView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
 
 from .models import PetOwner, Pet
-from .forms import OwnerForm
+from .forms import OwnerForm, PetForm
+
 
 # Create your views here.
 class OwnersList(ListView):
@@ -28,6 +29,12 @@ class OwnersCreate(CreateView):
     success_url = reverse_lazy("vet:owners_list")
 
 
+class OwnersUpdate(UpdateView):
+    model = PetOwner
+    form_class = OwnerForm
+    template_name = 'vet/owners/update.html'
+    success_url= reverse_lazy("vet:owners_list")
+
 class PetsList(ListView):
     model = Pet
     template_name = "vet/pets/list.html"
@@ -38,3 +45,15 @@ class PetsDetail(DetailView):
     model = Pet
     template_name = "vet/pets/detail.html"
     context_object_name = "pet"
+
+class PetsCreate(CreateView):
+    model =  Pet
+    template_name = 'vet/pets/create.html'
+    form_class = PetForm 
+    success_url = reverse_lazy('vet:pets_list')
+
+class PetsUpdate(UpdateView):
+    model = Pet
+    form_class = PetForm
+    template_name = 'vet/pets/update.html'
+    success_url= reverse_lazy("vet:pets_list")
