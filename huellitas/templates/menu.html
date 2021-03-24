@@ -1,24 +1,22 @@
-<nav>
-  <ul>
-    <li>
-      <a href="{% url 'vet:owners_list' %}">
-        Owners
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'vet:pets_list' %}">
-        Pets
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'vet:owners_create' %}">
-        Add owner
-      </a>
-    </li>
-    <li>
-      <a href="{% url 'vet:pets_create' %}">
-        Add Pet
-      </a>
-    </li>
-  </ul>
-</nav>
+<ul class="nav p-2">
+  <li class="nav-item">
+    <a class="nav-link text-white" href="/vet/pets/">
+      Pets
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="/vet/owners/">
+      Owners
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'vet:owners_create' %}">
+      Add owner
+    </a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link text-white" href="{% url 'vet:pets_create' %}">
+      Add Pet
+    </a>
+  </li>
+</ul>

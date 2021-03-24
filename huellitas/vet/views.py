@@ -28,6 +28,13 @@ class OwnersCreate(CreateView):
     form_class = OwnerForm
     success_url = reverse_lazy("vet:owners_list")
 
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context["owners"] = PetOwner.objects.all().orderby("created_at")
+    #     print(context)
+    #     return(context)
+
+
 
 class OwnersUpdate(UpdateView):
     model = PetOwner
