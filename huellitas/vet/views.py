@@ -59,6 +59,12 @@ class PetsCreate(CreateView):
     form_class = PetForm 
     success_url = reverse_lazy('vet:pets_list')
 
+    def get_initial(self):
+        initial = {}
+        for queryparam in self.request.GET:
+            initial[queryparam] = self.request.GET[queryparam]
+        return initial
+
 class PetsUpdate(UpdateView):
     model = Pet
     form_class = PetForm

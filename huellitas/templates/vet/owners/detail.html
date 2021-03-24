@@ -23,6 +23,7 @@
           <tr>
             <th>ID</th>
             <th>Name</th>
+            <th>Type</th>
           </tr>
           {% for pet in owner.pets.all %}
           <tr>
@@ -32,12 +33,20 @@
               </a>
             </th>
             <td>{{ pet.name }}</td>
+            <td>{{ pet.type }}</td>
           </tr>
           {% endfor %}
-      </table>    
+      </table>
+      {% endif %}  
+      <a 
+        type="button"
+        class="btn btn-dark"
+        href="{% url 'vet:pets_create' %}?owner={{owner.id}}">
+        Add Pet
+      </a>  
     </div>
   </div>
 </div>
-{% endif %}
+
 
 {% endblock content %}
