@@ -14,3 +14,5 @@ class PetForm(forms.ModelForm):
         model = Pet
         fields = ["name", "type", "owner"]
         widgets = {"name ": forms.EmailInput()}
+
+
