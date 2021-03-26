@@ -1,31 +1,19 @@
 # from django.shortcuts import render
 
-from rest_framework import viewsets
+from rest_framework import generics
 
 from vet.models import PetOwner, Pet, PetDate
-from .serializers import OwnersSerializer, PetsSerializer,PetDateSerializer
 
-# Create your views here.
-class OwnersViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet del modelo PetOwners.
-    """
+from .serializers import OwnersListSerializer, OwnersSerializer
 
+class ListOwnersAPIView(generics.ListAPIView):
+    queryset = PetOwner.objects.all().order_by("created_at")
+    serializer_class = OwnersListSerializer
+
+class CreateOwnersAPIView(generics.CreateAPIView):
     queryset = PetOwner.objects.all()
     serializer_class = OwnersSerializer
 
-class PetsViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet del modelo Pets.
-    """
-
-    queryset = Pet.objects.all()
-    serializer_class = PetsSerializer
-
-class PetDateViewSet(viewsets.ModelViewSet):
-    """
-    ViewSet del modelo PetDate.
-    """
-
-    queryset = PetDate.objects.all()
-    serializer_class = PetDateSerializer
+class RetrieveOwnersAPIView(generics.RetrieveAPIView):
+    queryset = PetOwner.objects.all()
+    serializer_class = OwnersSerializer
