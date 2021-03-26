@@ -18,6 +18,7 @@ class OwnersSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
 
+
 ### Adelanto de clase
 class PetsListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -32,27 +33,10 @@ class PetsSerializer(serializers.ModelSerializer):
         model = Pet
         fields = "__all__"
 
-# class PetsSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model=Pet
-#         fields = [
-#             "id",
-#             "name",
-#             "type",
-#             "owner_id"
-            
-#         ] 
 
-# class PetDateSerializer(serializers.HyperlinkedModelSerializer):
-#     class Meta:
-#         model=PetDate
-#         fields = [
-#             "id",
-#             "datetime",
-#             "type",
-#             "created_at",
-            
-#         ] 
-
-
-# #HyperlinkedRelatedField?
+class OwnersPetsSerializar(serializers.ModelSerializer):
+    pets = PetsListSerializer(many=True)
+    
+    class Meta:
+        model = PetOwner
+        fields = ["id", "first_name", "last_name","email","phone", "address", "created_at", "pets"]
