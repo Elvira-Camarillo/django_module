@@ -9,7 +9,8 @@ from .serializers import (
     OwnersSerializer, 
     PetsListSerializer, 
     PetsSerializer, 
-    OwnersPetsSerializar
+    OwnersPetsSerializar,
+    PetOwnerSerializer
 )
 
 class ListOwnersAPIView(generics.ListAPIView):
@@ -56,3 +57,11 @@ class UpdatePetsListAPIView(generics.UpdateAPIView):
 class DestroyPetsListAPIView(generics.DestroyAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetsSerializer
+
+
+class RetrievePetsOwnerAPIView(generics.RetrieveAPIView):
+    queryset = Pet.objects.all()
+    serializer_class = PetOwnerSerializer
+
+
+# Detalle de la mascota más su lista de citas

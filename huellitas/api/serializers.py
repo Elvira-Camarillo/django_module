@@ -40,3 +40,9 @@ class OwnersPetsSerializar(serializers.ModelSerializer):
     class Meta:
         model = PetOwner
         fields = ["id", "first_name", "last_name","email","phone", "address", "created_at", "pets"]
+
+class PetOwnerSerializer(serializers.ModelSerializer):
+    owner = OwnersListSerializer()
+    class Meta:
+        model = Pet
+        fields = ["id","name","type","created_at","owner"]
