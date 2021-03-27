@@ -11,7 +11,13 @@ UpdatePetsListAPIView,
 DestroyOwnersListAPIView, 
 DestroyPetsListAPIView,
 RetrieveOwnerPetsAPIView,
-RetrievePetsOwnerAPIView
+RetrievePetsOwnerAPIView,
+ListDatesAPIView,
+CreateDatesAPIView,
+RetrieveDatesAPIView,
+UpdateDatesListAPIView,
+DestroyDatesListAPIView,
+RetrieveDatesPetAPIView
 )
 
 urlpatterns = [
@@ -27,5 +33,12 @@ urlpatterns = [
     path("pets/<int:pk>/update", UpdatePetsListAPIView.as_view(),name="update-pets"),
     path("pets/<int:pk>/destroy", DestroyPetsListAPIView.as_view(),name="destroy-pets"),
     path("pets/<int:pk>/", RetrievePetsOwnerAPIView.as_view(),name="retrieve-pets-owner"),
+    ##  PetDates
+    path("dates/", ListDatesAPIView.as_view(),name="list-dates"),
+    path("dates/create/", CreateDatesAPIView.as_view(),name="create-dates"),
+    path("dates/<int:pk>/", RetrieveDatesAPIView.as_view(),name="retrieve-dates"),
+    path("dates/<int:pk>/update", UpdateDatesListAPIView.as_view(),name="update-dates"),
+    path("dates/<int:pk>/destroy", DestroyDatesListAPIView.as_view(),name="destroy-dates"),
+    path("dates/<int:pk>/pets", RetrieveDatesPetAPIView.as_view(),name="retrieve-dates-pet"),
 ]
 

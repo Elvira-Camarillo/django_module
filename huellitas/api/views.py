@@ -9,10 +9,13 @@ from .serializers import (
     OwnersSerializer, 
     PetsListSerializer, 
     PetsSerializer, 
-    OwnersPetsSerializar,
-    PetOwnerSerializer
+    OwnersPetsSerializer,
+    PetOwnerSerializer,
+    DatesListSerializer,
+    DatesSerializer,
+    DatesPetSerializer
 )
-
+# Views Owners
 class ListOwnersAPIView(generics.ListAPIView):
     queryset = PetOwner.objects.all().order_by("created_at")
     serializer_class = OwnersListSerializer
@@ -33,11 +36,12 @@ class DestroyOwnersListAPIView(generics.DestroyAPIView):
     queryset = PetOwner.objects.all()
     serializer_class = OwnersSerializer
 
-##MAscotas y 
+# Owner and pets
 class RetrieveOwnerPetsAPIView(generics.RetrieveAPIView):
     queryset = PetOwner.objects.all()
-    serializer_class = OwnersPetsSerializar
+    serializer_class = OwnersPetsSerializer
 
+## Pets 
 class ListPetsAPIView(generics.ListAPIView):
     queryset = Pet.objects.all().order_by("created_at")
     serializer_class = PetsListSerializer
@@ -58,10 +62,34 @@ class DestroyPetsListAPIView(generics.DestroyAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetsSerializer
 
-
+## Pets and Owners
 class RetrievePetsOwnerAPIView(generics.RetrieveAPIView):
     queryset = Pet.objects.all()
     serializer_class = PetOwnerSerializer
 
 
 # Detalle de la mascota más su lista de citas
+class ListDatesAPIView(generics.ListAPIView):
+    queryset = PetDate.objects.all().order_by("created_at")
+    serializer_class = DatesListSerializer
+
+class CreateDatesAPIView(generics.CreateAPIView):
+    queryset = PetDate.objects.all()
+    serializer_class = DatesSerializer
+
+class RetrieveDatesAPIView(generics.RetrieveAPIView):
+    queryset = PetDate.objects.all()
+    serializer_class = DatesSerializer
+
+class UpdateDatesListAPIView(generics.UpdateAPIView):
+    queryset = PetDate.objects.all()
+    serializer_class = DatesSerializer
+
+class DestroyDatesListAPIView(generics.DestroyAPIView):
+    queryset = PetDate.objects.all()
+    serializer_class = DatesSerializer
+
+# Lista de pets con 
+class RetrieveDatesPetAPIView(generics.RetrieveAPIView):
+    queryset = PetDate.objects.all()
+    serializer_class = DatesPetSerializer
