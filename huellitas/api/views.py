@@ -2,7 +2,7 @@
 
 from rest_framework import generics
 
-from vet.models import PetOwner, Pet, PetDate
+from vet.models import PetOwner, Pet, PetDate, Office
 
 from .serializers import (
     OwnersListSerializer, 
@@ -13,7 +13,9 @@ from .serializers import (
     PetOwnerSerializer,
     DatesListSerializer,
     DatesSerializer,
-    DatesPetSerializer
+    DatesPetSerializer,
+    OfficesListSerializer,
+    OfficesSerializer
 )
 # Views Owners
 class ListOwnersAPIView(generics.ListAPIView):
@@ -93,3 +95,16 @@ class DestroyDatesListAPIView(generics.DestroyAPIView):
 class RetrieveDatesPetAPIView(generics.RetrieveAPIView):
     queryset = PetDate.objects.all()
     serializer_class = DatesPetSerializer
+
+## Lista de oficionas
+class ListOfficesAPIView(generics.ListAPIView):
+    queryset = Office.objects.all()
+    serializer_class = OfficesListSerializer
+
+class CreateOfficesAPIView(generics.CreateAPIView):
+    queryset = Office.objects.all()
+    serializer_class = OfficesSerializer
+
+class RetrieveOfficesAPIView(generics.RetrieveAPIView):
+    queryset = Office.objects.all()
+    serializer_class = OfficesSerializer

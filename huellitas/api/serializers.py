@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from vet.models import PetOwner, Pet, PetDate
+from vet.models import PetOwner, Pet, PetDate, Office
 
 # Owners
 class OwnersListSerializer(serializers.ModelSerializer):
@@ -64,3 +64,14 @@ class DatesPetSerializer(serializers.ModelSerializer):
     class Meta:
         model = PetDate
         fields = ["id", "datime", "type", "created_at", "pet"]
+
+## Lista de oficinas
+class OfficesListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Office
+        fields = ['id','name','phone']
+
+class OfficesSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Office
+        fields = "__all__"
