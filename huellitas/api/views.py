@@ -1,6 +1,7 @@
 # from django.shortcuts import render
 
 from rest_framework import generics
+from django.contrib.auth.models import User
 
 from vet.models import PetOwner, Pet, PetDate, Office
 
@@ -15,7 +16,10 @@ from .serializers import (
     DatesSerializer,
     DatesPetSerializer,
     OfficesListSerializer,
-    OfficesSerializer
+    OfficesSerializer,
+    OfficeDatesSerializer,
+    DatesOfficeSerilizer,
+    UserSerializer
 )
 # Views Owners
 class ListOwnersAPIView(generics.ListAPIView):
@@ -108,3 +112,27 @@ class CreateOfficesAPIView(generics.CreateAPIView):
 class RetrieveOfficesAPIView(generics.RetrieveAPIView):
     queryset = Office.objects.all()
     serializer_class = OfficesSerializer
+
+class RetrieveOfficesAPIView(generics.RetrieveAPIView):
+    queryset = Office.objects.all()
+    serializer_class = OfficesSerializer
+
+
+class RetrieveOfficeDatesAPIView(generics.RetrieveAPIView):
+    queryset = Office.objects.all()
+    serializer_class = OfficeDatesSerializer
+
+class RetrieveDatesOfficeAPIView(generics.RetrieveAPIView):
+    queryset = PetDate.objects.all()
+    serializer_class = DatesOfficeSerilizer
+
+class RetriveUpdatePetsAPIView(generics.RetrieveUpdateAPIView):
+    queryset = Pet.objects.all()
+    serializer_class = PetsSerializer
+
+
+## Users
+
+class CreateUsersAPIView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer

@@ -36,6 +36,22 @@ class Pet(models.Model):
         return f"{self.name}, {self.type}"
 
 
+class Office(models.Model):
+    """ Office data model """
+    name = models.CharField(max_length=255)
+    zip_code = models.CharField(max_length=10)
+    address = models.TextField(max_length=1000)
+    longitude = models.FloatField()
+    latitude = models.FloatField()
+    phone = models.CharField(max_length=20, unique=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    #Relations
+
+    def __str__(self):
+        return f"{self.name},{self.address},{self.phone}"
+
+
 class PetDate(models.Model):
     """Pets date model."""
 
@@ -52,22 +68,7 @@ class PetDate(models.Model):
 
     # Relations
     pet = models.ForeignKey(Pet, on_delete=models.PROTECT, related_name="dates")
+    office = models.ForeignKey(Office, on_delete=models.PROTECT, related_name="offices", null=True)
 
     def __str__(self):
         return f"{self.datetime}, {self.pet.name}, {self.type}"
-
-class Office(models.Model):
-    """ Office data model """
-    name = models.CharField(max_length=255)
-    zip_code = models.CharField(max_length=10)
-    address = models.TextField(max_length=1000)
-    longitude = models.FloatField()
-    latitude = models.FloatField()
-    phone = models.CharField(max_length=20, unique=True)
-    created_at = models.DateTimeField(auto_now_add=True)
-
-    #Relations
-    petdate = models.ForeignKey(PetDate, on_delete=models.PROTECT, related_name='offices')
-
-    def __str__(self):
-        return f"{self.name},{self.address},{self.phone}"

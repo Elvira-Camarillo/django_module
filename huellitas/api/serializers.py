@@ -1,5 +1,7 @@
 from rest_framework import serializers
 
+from django.contrib.auth.models import User
+
 from vet.models import PetOwner, Pet, PetDate, Office
 
 # Owners
@@ -75,3 +77,45 @@ class OfficesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Office
         fields = "__all__"
+
+# Dates with offices
+class DatesOfficeSerilizer(serializers.ModelSerializer):
+    office = OfficesListSerializer()
+    pet = PetsListSerializer(many=True)
+    class Meta:
+        model = PetDate
+        fields = ["id", "datime", "type", "created_at", "pet", "office"]
+
+
+## List Office Detail with Dates -->Error
+class OfficeDatesSerializer(serializers.ModelSerializer):
+    date = DatesListSerializer()
+    class Meta:
+        model = Office
+        fields = ["id","name","zip_code","address","longitude","latitude","phone","created_at","date"]
+
+
+## USer
+
+class UserSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'first_name',
+            'last_name',
+            'email',
+            'password'
+        ]
+        extra_kwargs = {
+            'password':{
+                "writte_only": True
+            }
+        }
+    
+    def create(self, validate_data):
+        print(validate_data)
+        user =  User.objects.create_user(**validate_data)
+
+        return user
